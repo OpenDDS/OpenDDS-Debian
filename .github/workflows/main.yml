@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     env:
       DEBFULLNAME: "Fred Hornsey"
@@ -49,8 +49,8 @@ jobs:
         SHA=$(git rev-parse --short HEAD)
         cd ../OpenDDS-Debian
         git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
-        git fetch --depth 1 origin ubuntu_20_04
-        git checkout ubuntu_20_04
+        git fetch --depth 1 origin ubuntu_24_04
+        git checkout ubuntu_24_04
         cp ../opendds.deb opendds.deb
         git add opendds.deb
         git \
@@ -63,7 +63,7 @@ jobs:
       with:
         directory: 'OpenDDS-Debian'
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: 'ubuntu_20_04'
+        branch: 'ubuntu_24_04'
 
     - name: Lintian
       run: lintian --pedantic --info --display-info opendds.deb
